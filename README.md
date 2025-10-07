@@ -1,5 +1,5 @@
 # My Personal Porfolio Website
--Important information about myself:
+## Important information about myself:  
 **LinkedIn**: www.linkedin.com/in/arthur-coget-inf
 **Studies**: Applied Informatics UCLL Belgium (Professional Bachelor)
 **Personal Intro**:  I'm a passionate IT Software Developer eager to work in a
