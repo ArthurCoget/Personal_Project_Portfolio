@@ -1,1 +1,23 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --color-primary: #C72C41;
+  --color-secondary: #A50034;
+  --color-accent: #82063A;
+
+  --color-white: #FFFFFF;
+  --color-light: #F5F5F5;
+  --color-grey: #D9D9D9;
+
+  --font-family: "Krona One", sans-serif;
+
+  --nav-height: 92px;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--color-white);
+}

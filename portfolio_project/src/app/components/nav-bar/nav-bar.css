@@ -1,0 +1,91 @@
+.nav-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: var(--nav-height);
+  background-color: var(--color-white);
+  font-family: var(--font-family);
+  color: var(--color-secondary);
+  padding: 0 10%;
+}
+
+/* Left section */
+.nav-bar .left a {
+  display: flex;
+  align-items: center;
+  gap: 2.5em;
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--color-secondary);
+
+}
+
+/* Right section */
+.nav-bar .right {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+/* Logo scaling */
+.nav-bar .logo {
+  height: 100%;
+  max-height: var(--nav-height);
+  width: auto;
+  object-fit: contain;
+  padding: 1em 0;
+}
+
+/* Name styling */
+.nav-bar .name {
+  font-size: 2em;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+}
+
+/* Links */
+.nav-bar .right a {
+  position: relative;
+  text-decoration: none;
+  color: var(--color-secondary);
+  font-weight: 500;
+  font-size: 1.25em;
+  padding: 10px;
+
+  cursor: pointer;
+}
+
+.nav-bar .right a:hover {
+  color: var(--color-primary);
+}
+
+.nav-bar .right a:after{
+    content:'';
+    position: absolute;
+    width: 0;
+    left: 0;
+    height: 3px;
+    background-color: var(--color-primary);
+
+    bottom: 0px;
+    transition: 0.3s;
+}
+
+.nav-bar .right a:hover:after{
+    width: 100%;
+}
+
+.nav-bar .right a.active {
+  color: var(--color-primary);
+}
+
+.nav-bar .right a.active::after {
+  width: 100%;
+}
+
+.nav-bar .separtion {
+  font: bold;
+  cursor: default;
+}
+
+
