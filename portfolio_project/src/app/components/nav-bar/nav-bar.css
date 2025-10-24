@@ -7,6 +7,8 @@
   font-family: var(--font-family);
   color: var(--color-secondary);
   padding: 0 10%;
+
+  overflow: hidden;
 }
 
 /* Left section */
@@ -17,7 +19,6 @@
   cursor: pointer;
   text-decoration: none;
   color: var(--color-secondary);
-
 }
 
 /* Right section */
@@ -59,20 +60,20 @@
   color: var(--color-primary);
 }
 
-.nav-bar .right a:after{
-    content:'';
-    position: absolute;
-    width: 0;
-    left: 0;
-    height: 3px;
-    background-color: var(--color-primary);
+.nav-bar .right a:after {
+  content: '';
+  position: absolute;
+  width: 0;
+  left: 0;
+  height: 3px;
+  background-color: var(--color-primary);
 
-    bottom: 0px;
-    transition: 0.3s;
+  bottom: 0px;
+  transition: 0.3s;
 }
 
-.nav-bar .right a:hover:after{
-    width: 100%;
+.nav-bar .right a:hover:after {
+  width: 100%;
 }
 
 .nav-bar .right a.active {
@@ -87,5 +88,3 @@
   font: bold;
   cursor: default;
 }
-
-
