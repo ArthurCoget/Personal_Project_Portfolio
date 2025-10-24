@@ -19,7 +19,7 @@ export class BackgroundAnimation implements AfterViewInit {
   private ctx!: CanvasRenderingContext2D;
 
   private circles: Circle[] = [];
-  private readonly MAX_CIRCLES = 25;
+  private MAX_CIRCLES = 30;
   private animationFrameId: number | null = null;
 
   ngAfterViewInit(): void {
@@ -41,6 +41,12 @@ export class BackgroundAnimation implements AfterViewInit {
     const rect = canvas.getBoundingClientRect();
     canvas.width = rect.width;
     canvas.height = rect.height;
+
+    this.MAX_CIRCLES = this.calculateMaxCircles(canvas.width);
+
+    if (this.circles.length > this.MAX_CIRCLES) {
+      this.circles.length = this.MAX_CIRCLES;
+    }
 
     this.generateRandomCircles(canvas);
 
@@ -72,15 +78,46 @@ export class BackgroundAnimation implements AfterViewInit {
         )
     );
 
+    this.drawLines();
+
     this.generateRandomCircles(canvas);
 
     this.animationFrameId = requestAnimationFrame(() => this.animate());
   }
 
+  private drawLines(): void {
+    const maxDistance = 150; // max distance where we draw a line
+
+    for (let i = 0; i < this.circles.length; i++) {
+      const c1 = this.circles[i];
+
+      for (let j = i + 1; j < this.circles.length; j++) {
+        // notice j = i + 1 to avoid duplicates
+        const c2 = this.circles[j];
+        const dx = c1.x - c2.x;
+        const dy = c1.y - c2.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance < maxDistance) {
+          const opacity = 1 - distance / maxDistance; // fade based on distance
+          const line = new Line(c1.x, c1.y, c2.x, c2.y);
+          line.draw(this.ctx, opacity);
+        }
+      }
+    }
+  }
+  private calculateMaxCircles(width: number): number {
+    if (width < 500) return 10;
+    if (width < 900) return 15;
+    if (width < 1300) return 20;
+    if (width < 1700) return 30;
+    return 40;
+  }
+
   private generateRandomCircles(canvas: HTMLCanvasElement): void {
     if (this.circles.length < this.MAX_CIRCLES) {
       for (let i = this.circles.length; i < this.MAX_CIRCLES; i++) {
-        const radius = 10;
+        const radius = 7.5;
 
         const side = Math.floor(Math.random() * 4);
         let x, y: number;
@@ -116,6 +153,23 @@ export class BackgroundAnimation implements AfterViewInit {
   }
 }
 
+class Line {
+  constructor(public x1: number, public y1: number, public x2: number, public y2: number) {}
+
+  draw(ctx: CanvasRenderingContext2D, opacity: number = 1): void {
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(this.x1, this.y1);
+    ctx.lineTo(this.x2, this.y2);
+    ctx.strokeStyle = `rgba(199, 44, 65, ${opacity})`;
+    ctx.lineCap = 'round';
+    ctx.lineWidth = 7.5;
+    ctx.stroke();
+    ctx.closePath();
+    ctx.restore();
+  }
+}
+
 class Circle {
   constructor(
     public x: number,
@@ -129,9 +183,9 @@ class Circle {
     ctx.save();
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-    ctx.fillStyle = 'rgba(237, 230, 232, 1)';
+    ctx.fillStyle = 'rgba(199, 44, 65, 0.5)';
     ctx.fill();
-    ctx.strokeStyle = 'rgba(130, 6, 58, 0.05)';
+    ctx.strokeStyle = 'rgba(237, 230, 232, 1)';
     ctx.stroke();
     ctx.closePath();
     ctx.restore();

@@ -8,5 +8,4 @@ import { BackgroundAnimation } from '../background-animation/background-animatio
   styleUrl: './home.css'
 })
 export class Home {
-
 }

@@ -1,11 +1,22 @@
 .canvas-container {
-  /* Setting the overall container size */
   width: 100%;
   height: 35vh;
 }
 .canvas {
+  display: block;
+  position: relative;
   background-color: var(--color-grey);
   width: 100%;
-  height: 100%; 
-  display: block;
+  height: 100%;
+
+  border-bottom: solid 1px var(--color-accent);
+  border-top: solid 1px var(--color-accent);
+}
+
+@media (max-width: 1200px) {
+  .canvas-container {
+    position: relative;
+    width: 100%;
+    height: 50vh;
+  }
 }
